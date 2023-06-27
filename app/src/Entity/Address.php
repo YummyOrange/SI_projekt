@@ -23,6 +23,13 @@ class Address
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $add_date = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?User $user = null;
+
+    #[ORM\ManyToOne]
+    private ?AnonUser $anon_user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +67,30 @@ class Address
     public function setAddDate(\DateTimeInterface $add_date): self
     {
         $this->add_date = $add_date;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user_id = $user;
+
+        return $this;
+    }
+
+    public function getAnonUser(): ?AnonUser
+    {
+        return $this->anon_user;
+    }
+
+    public function setAnonUser(?AnonUser $anon_user): self
+    {
+        $this->anon_user = $anon_user;
 
         return $this;
     }
