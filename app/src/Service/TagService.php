@@ -7,15 +7,72 @@ namespace App\Service;
 
 use App\Entity\Tag;
 use App\Repository\TagRepository;
-use App\Service\TagServiceInterface;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use App\Service\TagServiceInterface;
 
 /**
  * Class TagService.
  */
 class TagService implements TagServiceInterface
 {
+    /**
+     * Tag repository.
+     */
+    private TagRepository $tagRepository;
+
+    /**
+     * Paginator.
+     */
+    private PaginatorInterface $paginator;
+
+    /**
+     * Constructor.
+     *
+     * @param TagRepository  $tagRepository Tag repository
+     * @param PaginatorInterface $paginator         Paginator
+     */
+    public function __construct(TagRepository $tagRepository, PaginatorInterface $paginator)
+    {
+        $this->tagRepository = $tagRepository;
+        $this->paginator = $paginator;
+    }
+
+    /**
+     * Get paginated list.
+     *
+     * @return PaginationInterface<string, mixed> Paginated list
+     */
+    public function getPaginatedList(int $page): PaginationInterface
+    {
+        return $this->paginator->paginate(
+            $this->tagRepository->queryAll(),
+            $page,
+            TagRepository::PAGINATOR_ITEMS_PER_PAGE
+        );
+    }
+
+    /**
+     * Save entity.
+     *
+     * @param Tag $tag Tag entity
+     */
+    public function save(Tag $tag): void
+    {
+        $this->tagRepository->save($tag);
+    }
+
+    /**
+     * Delete entity.
+     *
+     * @param Tag $tag Tag entity
+     */
+    public function delete(Tag $tag): void
+    {
+        $this->tagRepository->delete($tag);
+    }
+
+
     /**
      * Find by title.
      *
@@ -26,62 +83,5 @@ class TagService implements TagServiceInterface
     public function findOneByTitle(string $title): ?Tag
     {
         return $this->tagRepository->findOneByTitle($title);
-    }
-    /**
-     * Tag repository.
-     */
-    private TagRepository $repository;
-
-    /**
-     * Paginator.
-     */
-    private PaginatorInterface $paginator;
-
-    /**
-     * Constructor.
-     *
-     * @param TagRepository      $repository
-     * @param PaginatorInterface $paginator  Paginator
-     */
-    public function __construct(TagRepository $tagRepository, PaginatorInterface $paginator)
-    {
-        $this->repository = $tagRepository;
-        $this->paginator = $paginator;
-    }
-
-    /**
-     * Get paginated list.
-     *
-     * @param int $page Page number
-     *
-     * @return PaginationInterface<string, mixed> Paginated list
-     */
-    public function getPaginatedList(int $page): PaginationInterface
-    {
-        return $this->paginator->paginate(
-            $this->repository->queryAll(),
-            $page,
-            TagRepository::PAGINATOR_ITEMS_PER_PAGE
-        );
-    }
-
-    public function getOne(int $id)
-    {
-        return $this->repository->findOneById($id);
-    }
-
-    /**
-     * Save entity.
-     *
-     * @param Tag $tag Tag entity
-     */
-    public function save(Tag $tag): void
-    {
-        $this->repository->save($tag);
-    }
-
-    public function delete(Tag $tag): void
-    {
-        $this->repository->delete($tag);
     }
 }

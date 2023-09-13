@@ -32,7 +32,7 @@
             </trans-unit>
             <trans-unit id="title.record_list">
                 <source>title.record_list</source>
-                <target>Lista rekordów</target>
+                <target>Lista adresów:</target>
             </trans-unit>
             <trans-unit id="title.record_view">
                 <source>title.record_view</source>

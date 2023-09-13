@@ -18,6 +18,10 @@
         <p>{{ address.addDate|date('Y-m-d') }}</p>
         <h3>{{ 'label.click_counter'|trans }}</h3>
         <p>{{ address.clickCounter }}</p>
+        <h3>{{ 'label.tags'|trans }}</h3>
+        <p>{% for tag in address.tags %}
+                {{ tag.title }},
+            {% endfor %}</p>
         <a href="{{ url('address_index') }}" title="{{ 'action.back_to_list'|trans }}">
             {{ 'action.back_to_list'|trans }}
         </a>
