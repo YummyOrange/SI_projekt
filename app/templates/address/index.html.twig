@@ -28,18 +28,19 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.address_in'|trans, 'address.address_in') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.address_out'|trans, 'address.address_out') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.add_date'|trans, 'address.add_date') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.click_counter'|trans, 'address.click_counter') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.click_counter'|trans, 'address.clickCounter') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.tags'|trans, 'tag.title') }}</th>
                 <th>{{ 'label.actions'|trans }}</th>
             </tr>
             </thead>
             <tbody>
+
             {% for address in pagination.items %}
                 <tr>
                     <td>{{ address.id }}</td>
                     <td>{{ address.addressIn }}</td>
                     <td>{{ address.addressOut }}</td>
-                    <td>{{ address.addDate|format_date('long') }}</td>
+                    <td>{{ address.addDate|date('Y/m/d') }}</td>
                     <td>{{ address.clickCounter }}</td>
                     <td>
                         {% for tag in address.tags %}

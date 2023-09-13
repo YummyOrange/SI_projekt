@@ -9,15 +9,15 @@
     {% if address is defined %}
         <h3>{{ 'label.id'|trans }}: {{ address.id }}</h3>
         <h3>Tytuł</h3>
-        <p>{{ address.title }}</p>
+        <p>{{ address.addressIn }}</p>
 {#        <h3>Komentarz</h3>#}
 {#        <p>{{ address.comment }}</p>#}
-        <h3>{{ 'label.created_at'|trans }}</h3>
-        <p>{{ address.createdAt|date('Y-m-d') }}</p>
-        <h3>{{ 'label.updated_at'|trans }}</h3>
-        <p>{{ address.updatedAt|date('Y-m-d') }}</p>
-        <h3>{{ 'label.category'|trans }}</h3>
-        <p>{{ address.category.title }}</p>
+        <h3>{{ 'label.address_out'|trans }}</h3>
+        <p>{{ address.addressOut }}</p>
+        <h3>{{ 'label.add_date'|trans }}</h3>
+        <p>{{ address.addDate|date('Y-m-d') }}</p>
+        <h3>{{ 'label.click_counter'|trans }}</h3>
+        <p>{{ address.clickCounter }}</p>
         <a href="{{ url('address_index') }}" title="{{ 'action.back_to_list'|trans }}">
             {{ 'action.back_to_list'|trans }}
         </a>

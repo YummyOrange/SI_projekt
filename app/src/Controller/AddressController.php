@@ -56,7 +56,6 @@ class AddressController extends AbstractController
     {
         $pagination = $this->addressService->getPaginatedList(
             $request->query->getInt('page', 1),
-            $this->getUser()
         );
 
         return $this->render('address/index.html.twig', ['pagination' => $pagination]);
@@ -70,7 +69,6 @@ class AddressController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}', name: 'address_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET', )]
-    #[IsGranted('VIEW', subject: 'address')]
     public function show(Address $address): Response
     {
         return $this->render('address/show.html.twig', ['address' => $address]);
@@ -96,6 +94,9 @@ class AddressController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $address->setAddressOut('chuj');
+            $address->setAddDate(new \DateTime('now'));
+            $address->setClickCounter(0);
             $this->addressService->save($address);
 
             $this->addFlash(

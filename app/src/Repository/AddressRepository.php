@@ -67,4 +67,21 @@ class AddressRepository extends ServiceEntityRepository
     {
         return $queryBuilder ?? $this->createQueryBuilder('address');
     }
+
+    /**
+     * Save entity.
+     *
+     * @param Address $address
+     */
+    public function save(Address $address): void
+    {
+        $this->_em->persist($address);
+        $this->_em->flush();
+    }
+
+    public function delete(Address $address)
+    {
+        $this->_em->remove($address);
+        $this->_em->flush();
+    }
 }
