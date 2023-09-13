@@ -6,7 +6,6 @@
 namespace App\Service;
 
 use App\Entity\Address;
-use App\Entity\User;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 
 /**

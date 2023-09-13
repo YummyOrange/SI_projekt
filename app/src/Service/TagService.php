@@ -17,6 +17,17 @@ use Knp\Component\Pager\PaginatorInterface;
 class TagService implements TagServiceInterface
 {
     /**
+     * Find by title.
+     *
+     * @param string $title Tag title
+     *
+     * @return Tag|null Tag entity
+     */
+    public function findOneByTitle(string $title): ?Tag
+    {
+        return $this->tagRepository->findOneByTitle($title);
+    }
+    /**
      * Tag repository.
      */
     private TagRepository $repository;
@@ -72,17 +83,5 @@ class TagService implements TagServiceInterface
     public function delete(Tag $tag): void
     {
         $this->repository->delete($tag);
-    }
-
-    /**
-     * Find by title.
-     *
-     * @param string $title Tag title
-     *
-     * @return Tag|null Tag entity
-     */
-    public function findOneByTitle(string $title): ?Tag
-    {
-        return $this->repository->findOneByTitle($title);
     }
 }

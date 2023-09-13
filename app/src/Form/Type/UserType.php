@@ -3,7 +3,7 @@
  * User type.
  */
 
-namespace Form\Type;
+namespace App\Form\Type;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;

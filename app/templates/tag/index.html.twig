@@ -38,9 +38,20 @@
                     <td>{{ tag.title }}</td>
                     <td>{{ tag.createdAt|date('Y/m/d') }}</td>
                     <td>{{ tag.updatedAt|format_date('long') }}</td>
-                    <td><a href="{{ path('tag_show', {'id': tag.id}) }}">{{ 'button.action_show'|trans }}</a></td>
-                    <td><a href="{{ path('tag_edit', {'id': tag.id}) }}">{{ 'button.action_edit'|trans }}</a></td>
-                    <td><a href="{{ path('tag_delete', {'id': tag.id}) }}">{{ 'button.action_delete'|trans }}</a></td>
+                    <td>
+
+                        <a class="btn btn-outline-primary" href="{{ url('tag_show', {id: tag.id}) }}" title="{{ 'button.action_show'|trans }}">
+                            {{ 'button.action_show'|trans }}
+                        </a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a class="btn btn-outline-success" href="{{ url('tag_edit', {id: tag.id}) }}" title="{{ 'button.action_edit'|trans }}">
+                                {{ 'button.action_edit'|trans }}
+                            </a>
+                            <a class="btn btn-outline-danger" href="{{ url('tag_delete', {id: tag.id}) }}" title="{{ 'button.action_delete'|trans }}">
+                                {{ 'button.action_delete'|trans }}
+                            </a>
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

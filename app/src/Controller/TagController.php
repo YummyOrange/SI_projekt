@@ -5,7 +5,7 @@
 
 namespace App\Controller;
 
-use Form\Type\TagType;
+use App\Form\Type\TagType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use App\Entity\Tag;
 use App\Service\TagServiceInterface;

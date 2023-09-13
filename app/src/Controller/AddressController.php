@@ -7,7 +7,7 @@ namespace App\Controller;
 
 use App\Entity\Address;
 use App\Service\AddressServiceInterface;
-use Form\Type\AddressType;
+use App\Form\Type\AddressType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
