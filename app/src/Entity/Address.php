@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AddressRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,6 +31,17 @@ class Address
 
     #[ORM\ManyToOne]
     private ?AnonUser $anon_user = null;
+
+    #[ORM\ManyToMany(targetEntity: Tag::class, mappedBy: 'address')]
+    private Collection $tags;
+
+    #[ORM\Column]
+    private ?int $clickCounter = null;
+
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -91,6 +104,45 @@ class Address
     public function setAnonUser(?AnonUser $anon_user): self
     {
         $this->anon_user = $anon_user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tag>
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags->add($tag);
+            $tag->addAddress($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        if ($this->tags->removeElement($tag)) {
+            $tag->removeAddress($this);
+        }
+
+        return $this;
+    }
+
+    public function getClickCounter(): ?int
+    {
+        return $this->clickCounter;
+    }
+
+    public function setClickCounter(int $clickCounter): self
+    {
+        $this->clickCounter = $clickCounter;
 
         return $this;
     }

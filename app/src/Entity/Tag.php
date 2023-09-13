@@ -64,6 +64,14 @@ class Tag
     #[Gedmo\Slug(fields: ['title'])]
     private ?string $slug = null;
 
+    #[ORM\ManyToMany(targetEntity: Address::class, inversedBy: 'tags')]
+    private Collection $address;
+
+    public function __construct()
+    {
+        $this->address = new ArrayCollection();
+    }
+
     /**
      * Getter for Id.
      *
@@ -118,6 +126,30 @@ class Tag
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Address>
+     */
+    public function getAddress(): Collection
+    {
+        return $this->address;
+    }
+
+    public function addAddress(Address $address): self
+    {
+        if (!$this->address->contains($address)) {
+            $this->address->add($address);
+        }
+
+        return $this;
+    }
+
+    public function removeAddress(Address $address): self
+    {
+        $this->address->removeElement($address);
 
         return $this;
     }

@@ -6,13 +6,10 @@
 
     <ul class="nav">
         <li class="nav-item">
-            <a class="nav-link" href="{{ path('task_index') }}">Zadania</a>
+            <a class="nav-link" href="{{ path('address_index') }}">{{ "label.addresses"|trans }}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" href="{{ path('category_index') }}">Kategorie</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="{{ path('tag_index') }}">Tagi</a>
+            <a class="nav-link active" href="{{ path('tag_index') }}">{{ "label.tags"|trans }}</a>
         </li>
     </ul>
 
