@@ -18,6 +18,7 @@
         <div>{{ app.user.email }}</div>
         <div>
             <a href="{{ url('app_logout') }}">{{ 'action_logout'|trans }}</a>
+            <a href="{{ url('change_password') }}">{{ 'button.change_password'|trans }}</a>
         </div>
     {% else %}
         <div>
