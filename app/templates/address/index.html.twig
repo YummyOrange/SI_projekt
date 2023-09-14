@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'title.record_list'|trans }}{% endblock %}
+{% block title %}{{ 'title.address_list'|trans }}{% endblock %}
 
 {% block body %}
 
@@ -13,7 +13,7 @@
         </li>
     </ul>
 
-    <h1>{{ 'title.record_list'|trans }}</h1>
+    <h1>{{ 'title.address_list'|trans }}</h1>
     <a href="{{ path('address_create') }}">{{ 'button.action_create'|trans }}</a>
 
     {% if pagination is defined and pagination.items|length %}
@@ -39,7 +39,7 @@
                 <tr>
                     <td>{{ address.id }}</td>
                     <td>{{ address.addressIn }}</td>
-                    <td>{{ address.addressOut }}</td>
+                    <td>https://wierzba.wzks.uj.edu.pl/~21_sproch/url-app/link/{{ address.addressOut }}</td>
                     <td>{{ address.addDate|date('Y/m/d') }}</td>
                     <td>{{ address.clickCounter }}</td>
                     <td>

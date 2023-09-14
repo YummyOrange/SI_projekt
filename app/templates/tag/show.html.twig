@@ -14,6 +14,10 @@
         <p>{{ record.createdAt|date('Y-m-d') }}</p>
         <h3>{{ 'label.updated_at'|trans }}</h3>
         <p>{{ record.updatedAt|date('Y-m-d') }}</p>
+        <h3>{{ 'label.address_to_tag'|trans }}</h3>
+        <p>{% for address in record.address %}
+                {{ address.addressIn }},
+            {% endfor %}</p>
         <a href="{{ url('tag_index') }}" title="{{ 'action.back_to_list'|trans }}">
             {{ 'action.back_to_list'|trans }}
         </a>

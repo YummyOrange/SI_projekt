@@ -5,12 +5,10 @@
 
 namespace App\Form\Type;
 
-
 use App\Entity\Address;
-use App\Entity\AnonUser;
 use App\Form\DataTransformer\TagsDataTransformer;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,8 +20,6 @@ class AddressType extends AbstractType
 {
     /**
      * Tags data transformer.
-     *
-     * @var TagsDataTransformer
      */
     private TagsDataTransformer $tagsDataTransformer;
 
@@ -64,6 +60,12 @@ class AddressType extends AbstractType
                 'attr' => ['max_length' => 128],
             ]
         );
+        $builder->add('anon_user', EmailType::class, [
+            'label' => 'label.enter_email',
+            'required' => true,
+            'mapped' => false,
+            'attr' => ['max_length' => 255],
+        ]);
 
         $builder->get('tags')->addModelTransformer(
             $this->tagsDataTransformer

@@ -6,7 +6,9 @@
 namespace App\Controller;
 
 use App\Entity\Address;
+use App\Entity\AnonUser;
 use App\Form\Type\AddressType;
+use App\Repository\AnonUserRepository;
 use App\Service\AddressServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -30,6 +32,10 @@ class AddressController extends AbstractController
      * Translator.
      */
     private TranslatorInterface $translator;
+    /**
+     * AnonUserRepository.
+     */
+    private AnonUserRepository $anonUserRepository;
 
     /**
      * Constructor.
@@ -37,10 +43,11 @@ class AddressController extends AbstractController
      * @param AddressServiceInterface $addressService Address service
      * @param TranslatorInterface     $translator     Translator
      */
-    public function __construct(AddressServiceInterface $addressService, TranslatorInterface $translator)
+    public function __construct(AddressServiceInterface $addressService, TranslatorInterface $translator, AnonUserRepository $anonUserRepository)
     {
         $this->addressService = $addressService;
         $this->translator = $translator;
+        $this->anonUserRepository = $anonUserRepository;
     }
 
     /**
@@ -93,6 +100,10 @@ class AddressController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $newuser = new AnonUser();
+            $newuser->setAnonUserEmail($form['anon_user']->getData());
+            $this->anonUserRepository->save($newuser);
+            $address->setAnonUser($newuser);
             $address->setAddressOut(rand(0001, 9999));
             $address->setAddDate(new \DateTime('now'));
             $address->setClickCounter(0);

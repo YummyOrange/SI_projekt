@@ -13,11 +13,13 @@
 {#        <h3>Komentarz</h3>#}
 {#        <p>{{ address.comment }}</p>#}
         <h3>{{ 'label.address_out'|trans }}</h3>
-        <p>{{ address.addressOut }}</p>
+        <p>https://wierzba.wzks.uj.edu.pl/~21_sproch/url-app/link/{{ address.addressOut }}</p>
         <h3>{{ 'label.add_date'|trans }}</h3>
         <p>{{ address.addDate|date('Y-m-d') }}</p>
         <h3>{{ 'label.click_counter'|trans }}</h3>
         <p>{{ address.clickCounter }}</p>
+        <h3>{{ 'label.author'|trans }}</h3>
+        <p>{{ address.anonUser.anonUserEmail }}</p>
         <h3>{{ 'label.tags'|trans }}</h3>
         <p>{% for tag in address.tags %}
                 {{ tag.title }},

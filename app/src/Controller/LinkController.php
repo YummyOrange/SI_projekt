@@ -34,12 +34,13 @@ class LinkController extends AbstractController
         $this->addressRepository = $addressRepository;
         $record = $this->addressRepository->findOneBy(['address_out' => $out]);
         $address = $record->getAddressIn();
+        $record->setClickCounter($record->getClickCounter() + 1);
+        $addressRepository->save($record);
         if (str_starts_with($address, 'https://') || str_starts_with($address, 'http://')) {
             $link = $address;
         } else {
             $link = 'https://'.$address;
         }
-
         return $this->redirect($link);
     }
 }
