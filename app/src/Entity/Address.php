@@ -19,7 +19,7 @@ class Address
     #[ORM\Column(length: 255)]
     private ?string $address_in = null;
 
-    #[ORM\Column(length: 191)]
+    #[ORM\Column(length: 191, unique: true)]
     private ?string $address_out = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -29,8 +29,15 @@ class Address
     #[ORM\JoinColumn(nullable: true)]
     private ?User $user = null;
 
-    #[ORM\ManyToOne]
-    private ?AnonUser $anon_user = null;
+    /**
+     * AnonUser.
+     *
+     * @var ArrayCollection<int, AnonUser>
+     */
+    #[Assert\Valid]
+    #[ORM\ManyToOne(targetEntity: AnonUser::class, fetch: 'EXTRA_LAZY')]
+    #[ORM\JoinTable(name: 'address_anon_user')]
+    private $anon_user;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, mappedBy: 'address')]
     private Collection $tags;

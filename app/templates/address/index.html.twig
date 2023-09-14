@@ -24,12 +24,12 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'address.id') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.address_in'|trans, 'address.address_in') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.address_out'|trans, 'address.address_out') }}</th>
+                <th>{{ 'label.id'|trans}}</th>
+                <th>{{ 'label.address_in'|trans }}</th>
+                <th>{{ 'label.address_out'|trans}}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.add_date'|trans, 'address.add_date') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.click_counter'|trans, 'address.clickCounter') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.tags'|trans, 'tag.title') }}</th>
+                <th>{{'label.tags'|trans }}</th>
                 <th>{{ 'label.actions'|trans }}</th>
             </tr>
             </thead>

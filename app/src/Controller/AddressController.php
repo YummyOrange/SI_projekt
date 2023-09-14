@@ -6,9 +6,8 @@
 namespace App\Controller;
 
 use App\Entity\Address;
-use App\Service\AddressServiceInterface;
 use App\Form\Type\AddressType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Service\AddressServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -94,7 +93,7 @@ class AddressController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $address->setAddressOut('chuj');
+            $address->setAddressOut(rand(0001, 9999));
             $address->setAddDate(new \DateTime('now'));
             $address->setClickCounter(0);
             $this->addressService->save($address);
