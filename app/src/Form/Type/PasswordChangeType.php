@@ -37,7 +37,9 @@ class PasswordChangeType extends AbstractType
                 'label' => 'label.old_password',
                 'required' => true,
                 'attr' => ['max_length' => 255],
-            ]);
+                'mapped' => false,
+            ]
+        );
         $builder->add(
             'new_password',
             RepeatedType::class,
@@ -48,7 +50,8 @@ class PasswordChangeType extends AbstractType
                 'first_options' => ['label' => 'label.new_password'],
                 'second_options' => ['label' => 'label.repeat_new_password'],
                 'mapped' => false,
-            ]);
+            ]
+        );
     }
 
     /**

@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -23,17 +22,19 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 #[IsGranted('ROLE_USER')]
 class UserPanelController extends AbstractController
 {
-    private Security $security;
-
     private UserPasswordHasherInterface $passwordHasher;
 
     private UserRepository $userRepository;
 
     private TranslatorInterface $translator;
 
-    public function __construct(Security $security, UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository, TranslatorInterface $translator)
+    /**
+     * @param UserPasswordHasherInterface $passwordHasher
+     * @param UserRepository              $userRepository
+     * @param TranslatorInterface         $translator
+     */
+    public function __construct(UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository, TranslatorInterface $translator)
     {
-        $this->security = $security;
         $this->passwordHasher = $passwordHasher;
         $this->userRepository = $userRepository;
         $this->translator = $translator;
@@ -44,6 +45,11 @@ class UserPanelController extends AbstractController
         name: 'change_password',
         methods: ['GET', 'POST']
     )]
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function changePassword(Request $request): Response
     {
         $user = $this->getUser();
@@ -53,9 +59,9 @@ class UserPanelController extends AbstractController
             ['action' => $this->generateUrl('change_password')]
         );
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            if (strcmp($form['password']->getData(), 0 === $user->getPassword())) {
+            if (password_verify($form['password']->getData(), $user->getPassword())) {
+                echo 'IKSDE';
                 $newPassword = $this->passwordHasher->hashPassword($user, $form['new_password']->getData());
                 $user->setPassword($newPassword);
                 $this->userRepository->save($user, true);
@@ -69,7 +75,7 @@ class UserPanelController extends AbstractController
                     $this->translator->trans('message.error')
                 );
             }
-            exit();
+
             return $this->redirectToRoute('address_index');
         }
 
