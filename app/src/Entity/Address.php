@@ -1,5 +1,7 @@
 <?php
 
+/**Entity Address*/
+
 namespace App\Entity;
 
 use App\Repository\AddressRepository;
@@ -8,6 +10,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * Class Address.
+ */
 #[ORM\Entity(repositoryClass: AddressRepository::class)]
 class Address
 {
@@ -17,13 +22,13 @@ class Address
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $address_in = null;
+    private ?string $addressIn = null;
 
     #[ORM\Column(length: 191, unique: true)]
-    private ?string $address_out = null;
+    private ?string $addressOut = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $add_date = null;
+    private ?\DateTimeInterface $addDate = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: true)]
@@ -36,8 +41,8 @@ class Address
      */
     #[Assert\Valid]
     #[ORM\ManyToOne(targetEntity: AnonUser::class, fetch: 'EXTRA_LAZY')]
-    #[ORM\JoinTable(name: 'address_anon_user')]
-    private $anon_user;
+    #[ORM\JoinTable(name: 'address_anonUser')]
+    private $anonUser;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, mappedBy: 'address')]
     private Collection $tags;
@@ -45,84 +50,159 @@ class Address
     #[ORM\Column]
     private ?int $clickCounter = null;
 
+    /**
+     *Constructor.
+     */
     public function __construct()
     {
         $this->tags = new ArrayCollection();
     }
 
+    /**
+     * Function get Id.
+     *
+     * @return int|null Return Id
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Function Get Address In.
+     *
+     * @return string|null Return Address In
+     */
     public function getAddressIn(): ?string
     {
-        return $this->address_in;
+        return $this->addressIn;
     }
 
-    public function setAddressIn(string $address_in): self
+    /**
+     * Function Set Address In.
+     *
+     * @param string $addressIn New Address In
+     *
+     * @return $this Return this
+     */
+    public function setAddressIn(string $addressIn): self
     {
-        $this->address_in = $address_in;
-
-        return $this;
-    }
-
-    public function getAddressOut(): ?string
-    {
-        return $this->address_out;
-    }
-
-    public function setAddressOut(string $address_out): self
-    {
-        $this->address_out = $address_out;
-
-        return $this;
-    }
-
-    public function getAddDate(): ?\DateTimeInterface
-    {
-        return $this->add_date;
-    }
-
-    public function setAddDate(\DateTimeInterface $add_date): self
-    {
-        $this->add_date = $add_date;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user_id = $user;
-
-        return $this;
-    }
-
-    public function getAnonUser(): ?AnonUser
-    {
-        return $this->anon_user;
-    }
-
-    public function setAnonUser(?AnonUser $anon_user): self
-    {
-        $this->anon_user = $anon_user;
+        $this->addressIn = $addressIn;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, Tag>
+     * Function get Address Out.
+     *
+     * @return string|null Return address out
+     */
+    public function getAddressOut(): ?string
+    {
+        return $this->addressOut;
+    }
+
+    /**
+     * Function Set Address Out.
+     *
+     * @param string $addressOut New Address Out
+     *
+     * @return $this Return entity
+     */
+    public function setAddressOut(string $addressOut): self
+    {
+        $this->addressOut = $addressOut;
+
+        return $this;
+    }
+
+    /**
+     * Function get Add Date.
+     *
+     * @return \DateTimeImmutable|null Return addDate
+     */
+    public function getAddDate(): ?\DateTimeInterface
+    {
+        return $this->addDate;
+    }
+
+    /**
+     * Function Set Add Date.
+     *
+     * @param \DateTimeInterface $addDate New Add Date
+     *
+     * @return $this Return Entity
+     */
+    public function setAddDate(\DateTimeInterface $addDate): self
+    {
+        $this->addDate = $addDate;
+
+        return $this;
+    }
+
+    /**
+     * Function Get User.
+     *
+     * @return User|null Return User
+     */
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    /**
+     * Function Set User.
+     *
+     * @param User|null $user New User
+     *
+     * @return $this Return Entity
+     */
+    public function setUser(?User $user): self
+    {
+        $this->userId = $user;
+
+        return $this;
+    }
+
+    /**
+     * Function get Anon User.
+     *
+     * @return AnonUser|null Return AnonUser
+     */
+    public function getAnonUser(): ?AnonUser
+    {
+        return $this->anonUser;
+    }
+
+    /**
+     * Function Set Anon User.
+     *
+     * @param AnonUser|null $anonUser Anon User
+     *
+     * @return $this Return Entity
+     */
+    public function setAnonUser(?AnonUser $anonUser): self
+    {
+        $this->anonUser = $anonUser;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tag> Return Tags
      */
     public function getTags(): Collection
     {
         return $this->tags;
     }
 
+    /**
+     * Function Add Tag.
+     *
+     * @param Tag $tag New Tag
+     *
+     * @return $this Return Entity
+     */
     public function addTag(Tag $tag): self
     {
         if (!$this->tags->contains($tag)) {
@@ -133,6 +213,13 @@ class Address
         return $this;
     }
 
+    /**
+     * Function Remove Tag.
+     *
+     * @param Tag $tag Tag To Remove
+     *
+     * @return $this Return entity
+     */
     public function removeTag(Tag $tag): self
     {
         if ($this->tags->removeElement($tag)) {
@@ -142,11 +229,23 @@ class Address
         return $this;
     }
 
+    /**
+     * Function get Click Counter.
+     *
+     * @return int|null Return ClickCounter
+     */
     public function getClickCounter(): ?int
     {
         return $this->clickCounter;
     }
 
+    /**
+     * Function Set Click Counter.
+     *
+     * @param int $clickCounter New Number
+     *
+     * @return $this Return Entity
+     */
     public function setClickCounter(int $clickCounter): self
     {
         $this->clickCounter = $clickCounter;

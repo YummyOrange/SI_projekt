@@ -5,11 +5,12 @@
 
 namespace App\Controller;
 
-use App\Form\Type\TagType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use App\Entity\Tag;
+use App\Form\Type\TagType;
 use App\Service\TagServiceInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,6 +34,9 @@ class TagController extends AbstractController
 
     /**
      * Constructor.
+     *
+     * @param TagServiceInterface $tagService          Tag Service
+     * @param TranslatorInterface $translatorInterface Tag Service Interface
      */
     public function __construct(TagServiceInterface $tagService, TranslatorInterface $translatorInterface)
     {
@@ -113,12 +117,13 @@ class TagController extends AbstractController
     /**
      * Edit action.
      *
-     * @param Request  $request  HTTP request
-     * @param Tag $tag Tag entity
+     * @param Request $request HTTP request
+     * @param Tag     $tag     Tag entity
      *
      * @return Response HTTP response
      */
     #[Route('/{id}/edit', name: 'tag_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
+    #[IsGranted('ROLE_ADMIN', subject: 'tag')]
     public function edit(Request $request, Tag $tag): Response
     {
         $form = $this->createForm(
@@ -154,23 +159,15 @@ class TagController extends AbstractController
     /**
      * Delete action.
      *
-     * @param Request  $request  HTTP request
-     * @param Tag $tag Tag entity
+     * @param Request $request HTTP request
+     * @param Tag     $tag     Tag entity
      *
      * @return Response HTTP response
      */
     #[Route('/{id}/delete', name: 'tag_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
+    #[IsGranted('ROLE_ADMIN', subject: 'tag')]
     public function delete(Request $request, Tag $tag): Response
     {
-//        if(!$this->tagService->canBeDeleted($tag)) {
-//            $this->addFlash(
-//                'warning',
-//                $this->translator->trans('message.tag_contains_tasks')
-//            );
-//
-//            return $this->redirectToRoute('tag_index');
-//        }
-
         $form = $this->createForm(
             FormType::class,
             $tag,
@@ -200,6 +197,4 @@ class TagController extends AbstractController
             ]
         );
     }
-
-
 }

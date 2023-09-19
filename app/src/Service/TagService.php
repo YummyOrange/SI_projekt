@@ -9,7 +9,6 @@ use App\Entity\Tag;
 use App\Repository\TagRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
-use App\Service\TagServiceInterface;
 
 /**
  * Class TagService.
@@ -29,8 +28,8 @@ class TagService implements TagServiceInterface
     /**
      * Constructor.
      *
-     * @param TagRepository  $tagRepository Tag repository
-     * @param PaginatorInterface $paginator         Paginator
+     * @param TagRepository      $tagRepository Tag repository
+     * @param PaginatorInterface $paginator     Paginator
      */
     public function __construct(TagRepository $tagRepository, PaginatorInterface $paginator)
     {
@@ -40,6 +39,8 @@ class TagService implements TagServiceInterface
 
     /**
      * Get paginated list.
+     *
+     * @param int $page Page
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
@@ -71,7 +72,6 @@ class TagService implements TagServiceInterface
     {
         $this->tagRepository->delete($tag);
     }
-
 
     /**
      * Find by title.

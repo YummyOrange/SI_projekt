@@ -22,6 +22,14 @@ class LinkController extends AbstractController
      */
     private AddressRepository $addressRepository;
 
+    /**
+     * Link index.
+     *
+     * @param string            $out               Address out
+     * @param AddressRepository $addressRepository Address Repo
+     *
+     * @return Response Response
+     */
     #[NoReturn] #[Route(
         '/{out}',
         name: 'link_index',
@@ -32,7 +40,7 @@ class LinkController extends AbstractController
     public function index(string $out, AddressRepository $addressRepository): Response
     {
         $this->addressRepository = $addressRepository;
-        $record = $this->addressRepository->findOneBy(['address_out' => $out]);
+        $record = $this->addressRepository->findOneBy(['addressOut' => $out]);
         $address = $record->getAddressIn();
         $record->setClickCounter($record->getClickCounter() + 1);
         $addressRepository->save($record);
@@ -41,6 +49,7 @@ class LinkController extends AbstractController
         } else {
             $link = 'https://'.$address;
         }
+
         return $this->redirect($link);
     }
 }

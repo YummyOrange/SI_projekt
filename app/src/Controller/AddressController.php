@@ -7,9 +7,11 @@ namespace App\Controller;
 
 use App\Entity\Address;
 use App\Entity\AnonUser;
+use App\Entity\User;
 use App\Form\Type\AddressType;
 use App\Repository\AnonUserRepository;
 use App\Service\AddressServiceInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,8 +42,9 @@ class AddressController extends AbstractController
     /**
      * Constructor.
      *
-     * @param AddressServiceInterface $addressService Address service
-     * @param TranslatorInterface     $translator     Translator
+     * @param AddressServiceInterface $addressService     Address service
+     * @param TranslatorInterface     $translator         Translator
+     * @param AnonUserRepository      $anonUserRepository Anon User Repository
      */
     public function __construct(AddressServiceInterface $addressService, TranslatorInterface $translator, AnonUserRepository $anonUserRepository)
     {
@@ -74,7 +77,7 @@ class AddressController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/{id}', name: 'address_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET', )]
+    #[Route('/{id}', name: 'address_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET')]
     public function show(Address $address): Response
     {
         return $this->render('address/show.html.twig', ['address' => $address]);
@@ -132,6 +135,7 @@ class AddressController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/edit', name: 'address_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
+    #[IsGranted('ROLE_ADMIN', subject: 'address')]
     public function edit(Request $request, Address $address): Response
     {
         $form = $this->createForm(
@@ -173,6 +177,7 @@ class AddressController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/delete', name: 'address_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
+    #[IsGranted('ROLE_ADMIN', subject: 'address')]
     public function delete(Request $request, Address $address): Response
     {
         $form = $this->createForm(

@@ -53,7 +53,31 @@ class AddressRepository extends ServiceEntityRepository
     public function queryAll(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
-            ->orderBy('address.add_date', 'DESC');
+            ->orderBy('address.addDate', 'DESC');
+    }
+
+    /**
+     * Function save.
+     *
+     * @param Address $address Address to save
+     */
+    public function save(Address $address): void
+    {
+        $this->_em->persist($address);
+        $this->_em->flush();
+    }
+
+    /**
+     * Function delete.
+     *
+     * @param Address $address Address to remove
+     *
+     * @return void
+     */
+    public function delete(Address $address)
+    {
+        $this->_em->remove($address);
+        $this->_em->flush();
     }
 
     /**
@@ -66,22 +90,5 @@ class AddressRepository extends ServiceEntityRepository
     private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
         return $queryBuilder ?? $this->createQueryBuilder('address');
-    }
-
-    /**
-     * Save entity.
-     *
-     * @param Address $address
-     */
-    public function save(Address $address): void
-    {
-        $this->_em->persist($address);
-        $this->_em->flush();
-    }
-
-    public function delete(Address $address)
-    {
-        $this->_em->remove($address);
-        $this->_em->flush();
     }
 }

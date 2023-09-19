@@ -38,9 +38,11 @@ class AddressService implements AddressServiceInterface
     }
 
     /**
-     * Get paginated list.
+     * Get Paginated list.
      *
-     * @return PaginationInterface<string, mixed> Paginated list
+     * @param int $page Page
+     *
+     * @return PaginationInterface Interface
      */
     public function getPaginatedList(int $page): PaginationInterface
     {

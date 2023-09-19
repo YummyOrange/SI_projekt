@@ -9,7 +9,6 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
-use App\Service\UserServiceInterface;
 
 /**
  * Class UserService.
@@ -41,8 +40,7 @@ class UserService implements UserServiceInterface
     /**
      * Get paginated list.
      *
-     * @param int  $page   Page number
-     * @param User $author Author
+     * @param int $page Page number
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */

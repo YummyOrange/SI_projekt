@@ -1,5 +1,7 @@
 <?php
 
+/**User Repository*/
+
 namespace App\Repository;
 
 use App\Entity\User;
@@ -20,9 +22,13 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
+    public const PAGINATOR_ITEMS_PER_PAGE = 5;
 
-public const PAGINATOR_ITEMS_PER_PAGE = 5;
-
+    /**
+     * Constructor.
+     *
+     * @param ManagerRegistry $registry Registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
@@ -41,17 +47,11 @@ public const PAGINATOR_ITEMS_PER_PAGE = 5;
     }
 
     /**
-     * Get or create new query builder.
+     * Save function.
      *
-     * @param QueryBuilder|null $queryBuilder Query builder
-     *
-     * @return QueryBuilder Query builder
+     * @param User $entity Entity to save
+     * @param bool $flush  Flush
      */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
-    {
-        return $queryBuilder ?? $this->createQueryBuilder('user');
-    }
-
     public function save(User $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -61,6 +61,12 @@ public const PAGINATOR_ITEMS_PER_PAGE = 5;
         }
     }
 
+    /**
+     * Function remove.
+     *
+     * @param User $entity Entity to remove
+     * @param bool $flush  Flush
+     */
     public function remove(User $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
@@ -71,7 +77,10 @@ public const PAGINATOR_ITEMS_PER_PAGE = 5;
     }
 
     /**
-     * Used to upgrade (rehash) the user's password automatically over time.
+     * Function Upgrade Password.
+     *
+     * @param PasswordAuthenticatedUserInterface $user              User
+     * @param string                             $newHashedPassword New Password For User
      */
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
@@ -84,28 +93,15 @@ public const PAGINATOR_ITEMS_PER_PAGE = 5;
         $this->save($user, true);
     }
 
-//    /**
-//     * @return User[] Returns an array of User objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('u.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?User
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * Get or create new query builder.
+     *
+     * @param QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('user');
+    }
 }

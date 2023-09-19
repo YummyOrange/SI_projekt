@@ -29,9 +29,11 @@ class UserPanelController extends AbstractController
     private TranslatorInterface $translator;
 
     /**
-     * @param UserPasswordHasherInterface $passwordHasher
-     * @param UserRepository              $userRepository
-     * @param TranslatorInterface         $translator
+     * Constructor.
+     *
+     * @param UserPasswordHasherInterface $passwordHasher Password Hasher
+     * @param UserRepository              $userRepository User Repo
+     * @param TranslatorInterface         $translator     Translator
      */
     public function __construct(UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository, TranslatorInterface $translator)
     {
@@ -40,16 +42,19 @@ class UserPanelController extends AbstractController
         $this->translator = $translator;
     }
 
+    /**
+     * Change password.
+     *
+     * @param Request $request Request
+     *
+     * @return Response Response
+     */
     #[Route(
         '/password',
         name: 'change_password',
         methods: ['GET', 'POST']
     )]
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
+    #[IsGranted('ROLE_ADMIN')]
     public function changePassword(Request $request): Response
     {
         $user = $this->getUser();

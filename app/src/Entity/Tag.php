@@ -1,16 +1,20 @@
 <?php
+/**
+ * Tag Entity.
+ */
 
 namespace App\Entity;
 
 use App\Repository\TagRepository;
-use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
+/**
+ * Class Tag.
+ */
 #[ORM\Entity(repositoryClass: TagRepository::class)]
 #[ORM\Table(name: 'tags')]
 class Tag
@@ -25,28 +29,22 @@ class Tag
 
     /**
      * Created at.
-     *
-     * @var DateTimeImmutable|null
      */
     #[ORM\Column(type: 'datetime_immutable')]
-    #[Assert\Type(DateTimeImmutable::class)]
+    #[Assert\Type(\DateTimeImmutable::class)]
     #[Gedmo\Timestampable(on: 'create')]
     private ?\DateTimeImmutable $createdAt = null;
 
     /**
      * Updated at.
-     *
-     * @var DateTimeImmutable|null
      */
     #[ORM\Column(type: 'datetime_immutable')]
-    #[Assert\Type(DateTimeImmutable::class)]
+    #[Assert\Type(\DateTimeImmutable::class)]
     #[Gedmo\Timestampable(on: 'update')]
     private ?\DateTimeImmutable $updatedAt = null;
 
     /**
      * Title.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\Type('string')]
@@ -56,7 +54,6 @@ class Tag
 
     /**
      * Slug.
-     * @var string|null
      */
     #[ORM\Column(type: 'string', length: 64)]
     #[Assert\Type('string')]
@@ -67,6 +64,9 @@ class Tag
     #[ORM\ManyToMany(targetEntity: Address::class, inversedBy: 'tags')]
     private Collection $address;
 
+    /**
+     * Constructor.
+     */
     public function __construct()
     {
         $this->address = new ArrayCollection();
@@ -82,11 +82,23 @@ class Tag
         return $this->id;
     }
 
+    /**
+     * Getter for Created At.
+     *
+     * @return \DateTimeImmutable Created At
+     */
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
     }
 
+    /**
+     * Setter for created at.
+     *
+     * @param \DateTimeImmutable $createdAt New Date
+     *
+     * @return $this Entity
+     */
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
@@ -94,11 +106,23 @@ class Tag
         return $this;
     }
 
+    /**
+     * Getter for updated at.
+     *
+     * @return \DateTimeImmutable UpdatedAt
+     */
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
+    /**
+     * Setter for updated at.
+     *
+     * @param \DateTimeImmutable $updatedAt New Updated At
+     *
+     * @return $this Entity
+     */
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
@@ -106,11 +130,23 @@ class Tag
         return $this;
     }
 
+    /**
+     * Getter for slug.
+     *
+     * @return string Slug
+     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
+    /**
+     * Setter for slug.
+     *
+     * @param string $slug New Slug
+     *
+     * @return $this Entity
+     */
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
@@ -118,11 +154,23 @@ class Tag
         return $this;
     }
 
+    /**
+     * Getter for title.
+     *
+     * @return string Title
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * Setter for title.
+     *
+     * @param string $title New title
+     *
+     * @return $this Entity
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -131,13 +179,22 @@ class Tag
     }
 
     /**
-     * @return Collection<int, Address>
+     * Getter for address.
+     *
+     * @return Collection<int, Address> Addresses
      */
     public function getAddress(): Collection
     {
         return $this->address;
     }
 
+    /**
+     * Setter for address.
+     *
+     * @param Address $address New Address
+     *
+     * @return $this Entity
+     */
     public function addAddress(Address $address): self
     {
         if (!$this->address->contains($address)) {
@@ -147,6 +204,13 @@ class Tag
         return $this;
     }
 
+    /**
+     * Remove address.
+     *
+     * @param Address $address Address to delete
+     *
+     * @return $this Entity
+     */
     public function removeAddress(Address $address): self
     {
         $this->address->removeElement($address);

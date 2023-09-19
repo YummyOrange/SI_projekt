@@ -24,8 +24,6 @@ abstract class AbstractBaseFixtures extends Fixture
 
     /**
      * Persistence object manager.
-     *
-     * @var ObjectManager
      */
     protected ?ObjectManager $manager = null;
 
@@ -117,7 +115,7 @@ abstract class AbstractBaseFixtures extends Fixture
         }
 
         if (empty($this->referencesIndex[$groupName])) {
-            throw new InvalidArgumentException(sprintf('Did not find any references saved with the group name "%s"', $groupName));
+            throw new \InvalidArgumentException(sprintf('Did not find any references saved with the group name "%s"', $groupName));
         }
 
         $randomReferenceKey = (string) $this->faker->randomElement($this->referencesIndex[$groupName]);

@@ -1,5 +1,7 @@
 <?php
 
+/**Anon User Repository*/
+
 namespace App\Repository;
 
 use App\Entity\AnonUser;
@@ -16,11 +18,22 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class AnonUserRepository extends ServiceEntityRepository
 {
+    /**
+     * Constructor.
+     *
+     * @param ManagerRegistry $registry Registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, AnonUser::class);
     }
 
+    /**
+     * Function Save.
+     *
+     * @param AnonUser $entity Entity
+     * @param bool     $flush  Flush - false
+     */
     public function save(AnonUser $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -30,6 +43,12 @@ class AnonUserRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Function Remoove.
+     *
+     * @param AnonUser $entity Entity to remove
+     * @param bool     $flush  Flush
+     */
     public function remove(AnonUser $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
@@ -38,29 +57,4 @@ class AnonUserRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
-//    /**
-//     * @return AnonUser[] Returns an array of AnonUser objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?AnonUser
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

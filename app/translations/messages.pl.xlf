@@ -70,10 +70,211 @@
                 <source>label.category</source>
                 <target>Kategoria</target>
             </trans-unit>
-            <trans-unit id="action.back_to_list">
-                <source>action.back_to_list</source>
-                <target>Powrót do listy</target>
+            <trans-unit id="label.updated_at">
+                <source>label.updated_at</source>
+                <target>Data aktualizacji</target>
             </trans-unit>
+            <trans-unit id="message.created_successfully">
+                    <source>message.created_successfully</source>
+                    <target>Pomyślnie utworzono</target>
+                  </trans-unit>
+
+                  <trans-unit id="message.edited_successfully">
+                    <source>message.edited_successfully</source>
+                    <target>Pomyślnie edytowano</target>
+                  </trans-unit>
+
+                  <trans-unit id="message.deleted_successfully">
+                    <source>message.deleted_successfully</source>
+                    <target>Pomyślnie usunięto</target>
+                  </trans-unit>
+
+                  <trans-unit id="message.error">
+                    <source>message.error</source>
+                    <target>Błąd</target>
+                  </trans-unit>
+
+                  <trans-unit id="title.tag_create">
+                    <source>title.tag_create</source>
+                    <target>Utwórz tag</target>
+                  </trans-unit>
+
+                  <trans-unit id="action.save">
+                    <source>action.save</source>
+                    <target>Zapisz</target>
+                  </trans-unit>
+
+                  <trans-unit id="label.created_at">
+                    <source>label.created_at</source>
+                    <target>Data utworzenia</target>
+                  </trans-unit>
+
+                  <trans-unit id="label.address_to_tag">
+                    <source>label.address_to_tag</source>
+                    <target>Adresy przypisane do tagu</target>
+                  </trans-unit>
+
+                  <trans-unit id="action.back_to_list">
+                    <source>action.back_to_list</source>
+                    <target>Powrót do listy</target>
+                  </trans-unit>
+
+                  <trans-unit id="title.tag_edit">
+                    <source>title.tag_edit</source>
+                    <target>Edytuj tag</target>
+                  </trans-unit>
+
+                  <trans-unit id="action.edit">
+                    <source>action.edit</source>
+                    <target>Edytuj</target>
+                  </trans-unit>
+
+                  <trans-unit id="title.tag_list">
+                    <source>title.tag_list</source>
+                    <target>Lista tagów</target>
+                  </trans-unit>
+
+                  <trans-unit id="label.addresses">
+                    <source>label.addresses</source>
+                    <target>Adresy</target>
+                  </trans-unit>
+                    <trans-unit id="label.enter_email">
+                            <source>label.enter_email</source>
+                            <target>Twój Email</target>
+                    </trans-unit>
+
+                  <trans-unit id="title.tag_delete">
+                    <source>title.tag_delete</source>
+                    <target>Usuń tag</target>
+                  </trans-unit>
+
+                  <trans-unit id="action.delete">
+                    <source>action.delete</source>
+                    <target>Usuń</target>
+                  </trans-unit>
+
+                  <trans-unit id="title.user_create">
+                    <source>title.user_create</source>
+                    <target>Utwórz użytkownika</target>
+                  </trans-unit>
+
+                  <trans-unit id="label.user_in">
+                    <source>label.user_in</source>
+                    <target>Użytkownik wejściowy</target>
+                  </trans-unit>
+
+                  <trans-unit id="label.user_out">
+                    <source>label.user_out</source>
+                    <target>Użytkownik wyjściowy</target>
+                  </trans-unit>
+
+                  <trans-unit id="label.add_date">
+                    <source>label.add_date</source>
+                    <target>Data dodania</target>
+                  </trans-unit>
+
+                  <trans-unit id="label.click_counter">
+                    <source>label.click_counter</source>
+                    <target>Licznik kliknięć</target>
+                  </trans-unit>
+
+                  <trans-unit id="title.user_edit">
+                    <source>title.user_edit</source>
+                    <target>Edytuj użytkownika</target>
+                  </trans-unit>
+
+                  <trans-unit id="label.useres">
+                    <source>label.useres</source>
+                    <target>Użytkownicy</target>
+                  </trans-unit>
+
+                  <trans-unit id="label.email">
+                    <source>label.email</source>
+                    <target>Adres e-mail</target>
+                  </trans-unit>
+
+                  <trans-unit id="label.password">
+                    <source>label.password</source>
+                    <target>Hasło</target>
+                  </trans-unit>
+
+                  <trans-unit id="title.user_delete">
+                    <source>title.user_delete</source>
+                    <target>Usuń użytkownika</target>
+                  </trans-unit>
+
+                  <trans-unit id="title.change_password">
+                    <source>title.change_password</source>
+                    <target>Zmień hasło</target>
+                  </trans-unit>
+
+                  <trans-unit id="action_logout">
+                    <source>action_logout</source>
+                    <target>Wyloguj</target>
+                  </trans-unit>
+
+                  <trans-unit id="button.change_password">
+                    <source>button.change_password</source>
+                    <target>Zmień hasło</target>
+                  </trans-unit>
+
+                  <trans-unit id="action_login">
+                    <source>action_login</source>
+                    <target>Zaloguj</target>
+                  </trans-unit>
+
+                  <trans-unit id="message.form_error">
+                    <source>message.form_error</source>
+                    <target>Wystąpił błąd formularza</target>
+                  </trans-unit>
+
+                  <trans-unit id="title.address_create">
+                    <source>title.address_create</source>
+                    <target>Utwórz adres</target>
+                  </trans-unit>
+
+                  <trans-unit id="label.address_in">
+                    <source>label.address_in</source>
+                    <target>Adres wejściowy</target>
+                  </trans-unit>
+
+                  <trans-unit id="label.address_out">
+                    <source>label.address_out</source>
+                    <target>Adres wyjściowy</target>
+                  </trans-unit>
+
+                  <trans-unit id="label.author">
+                    <source>label.author</source>
+                    <target>Autor</target>
+                  </trans-unit>
+
+                  <trans-unit id="title.address_edit">
+                    <source>title.address_edit</source>
+                    <target>Edytuj adres</target>
+                  </trans-unit>
+
+                  <trans-unit id="title.address_list">
+                    <source>title.address_list</source>
+                    <target>Lista adresów</target>
+                  </trans-unit>
+
+                  <trans-unit id="title.address_delete">
+                    <source>title.address_delete</source>
+                    <target>Usuń adres</target>
+                  </trans-unit>
+                  <trans-unit id="label.old_password">
+                    <source>label.old_password</source>
+                    <target>Stare hasło</target>
+                  </trans-unit>
+                  <trans-unit id="label.new_password">
+                    <source>label.new_password</source>
+                    <target>Nowe hasło</target>
+                  </trans-unit>
+                  <trans-unit id="label.repeat_new_password">
+                    <source>label.repeat_new_password</source>
+                    <target>Powtórz nowe hasło</target>
+                  </trans-unit>
+
         </body>
     </file>
 </xliff>
